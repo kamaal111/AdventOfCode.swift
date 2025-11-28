@@ -1,0 +1,37 @@
+//
+//  Day{{ day }}Tests.swift
+//  AdventOfCode2
+//
+//  Created by Kamaal M Farah on {{ creation_date }}.
+//
+
+import Testing
+@testable import AdventOfCode2024
+
+private let day{{ day }} = Day{{ day }}()
+
+@Test func `Day {{ day }} Part 1 Example 1`() async throws {
+    let example = ""
+    let solution = try await day{{ day }}.solvePart1(example)
+
+    #expect(solution == "")
+}
+
+@Test func `Day {{ day }} Part 1`() async throws {
+    let solution = try await day{{ day }}.solvePart1(nil)
+
+    #expect(solution == "")
+}
+
+@Test func `Day {{ day }} Part 2 Example 1`() async throws {
+    let example = ""
+    let solution = try await day{{ day }}.solvePart2(example)
+
+    #expect(solution == "")
+}
+
+@Test func `Day {{ day }} Part 2`() async throws {
+    let solution = try await day{{ day }}.solvePart2(nil)
+
+    #expect(solution == "")
+}

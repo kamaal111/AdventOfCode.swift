@@ -1,0 +1,26 @@
+// swift-tools-version: 6.2
+// The swift-tools-version declares the minimum version of Swift required to build this package.
+
+import PackageDescription
+
+let package = Package(
+    name: "AdventOfCode2",
+    defaultLocalization: "en",
+    platforms: [.macOS(.v13)],
+    products: [
+        .library(name: "AdventOfCode2", targets: ["AdventOfCode2"]),
+        .library(name: "AdventOfCode2024", targets: ["AdventOfCode2024"]),
+    ],
+    dependencies: [
+        .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.6.2"),
+    ],
+    targets: [
+        .target(name: "AdventOfCode2"),
+        .target(
+            name: "AdventOfCode2024",
+            dependencies: ["AdventOfCode2"],
+            resources: [.process("Input")]
+        ),
+        .testTarget(name: "AdventOfCode2024Tests", dependencies: ["AdventOfCode2024"]),
+    ]
+)

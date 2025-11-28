@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "72F6714F-280D-46AD-AE8D-E61A0E949A88",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "performanceAntipatternCheckerEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "AdventOfCode2024Tests",
+        "name" : "AdventOfCode2024Tests"
+      }
+    }
+  ],
+  "version" : 1
+}

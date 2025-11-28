@@ -1,0 +1,22 @@
+{
+  "name": "advent-of-code2",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "day": "tsx --env-file=.env Scripts/make-day",
+    "input": "tsx --env-file=.env Scripts/get-input"
+  },
+  "keywords": [],
+  "author": "Kamaal Farah",
+  "license": "ISC",
+  "packageManager": "pnpm@10.23.0",
+  "devDependencies": {
+    "@kamaalio/prettier-config": "^0.1.2",
+    "@types/node": "^24.10.1",
+    "prettier": "^3.6.2",
+    "tsx": "^4.20.6",
+    "valibot": "^1.2.0"
+  },
+  "prettier": "@kamaalio/prettier-config"
+}

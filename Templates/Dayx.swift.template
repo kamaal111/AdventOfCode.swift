@@ -1,0 +1,32 @@
+//
+//  Day{{ day }}.swift
+//  AdventOfCode2
+//
+//  Created by Kamaal M Farah on {{ creation_date }}.
+//
+
+import Foundation
+import AdventOfCode2
+
+struct Day{{ day }}: AdventOfCodeSolver {
+    let day = {{ day }}
+    let bundle: Bundle = .module
+
+    func solvePart1(_ input: String?) async throws -> String {
+        let input = try parseInput(input)
+
+        return String(input)
+    }
+
+    func solvePart2(_ input: String?) async throws -> String {
+        let input = try parseInput(input)
+
+        return input
+    }
+
+    private func parseInput(_ input: String?) throws -> String {
+        let input = if let input { input } else { try getInput() }
+
+        return input
+    }
+}

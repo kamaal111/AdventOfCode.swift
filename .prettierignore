@@ -1,0 +1,6 @@
+Sources
+.swiftpm
+.build
+node_modules
+Tests
+pnpm-workspace.yaml
