@@ -7,7 +7,7 @@
 
 import Foundation
 
-package protocol AdventOfCodeSolver {
+package protocol AdventOfCodeSolver: Sendable {
     var day: Int { get }
     var bundle: Bundle { get }
 
