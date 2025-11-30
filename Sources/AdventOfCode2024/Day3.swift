@@ -36,15 +36,15 @@ struct Day3: AdventOfCodeSolver {
     }
 
     func solvePart1(_ input: String?) async throws -> String {
-        let multiplications = try parseInput(input)
+        let multiplications = parseInput(input)
         let result = addUpMultiplications(multiplications)
 
         return "\(result)"
     }
 
     func solvePart2(_ input: String?) async throws -> String {
-        let input = if let input { input } else { try getInput() }
-        let multiplications = try parseInput(input)
+        let input = input ?? getInput()
+        let multiplications = parseInput(input)
         let dontRanges = getDontRanges(input)
         let filteredMultiplications = multiplications.filter { multiplication in
             let isWithinDont = dontRanges.contains { dontRange in
@@ -64,8 +64,8 @@ struct Day3: AdventOfCodeSolver {
         }
     }
 
-    private func parseInput(_ input: String?) throws -> [(pair: Pair<Int>, start: String.Index)] {
-        let input = if let input { input } else { try getInput() }
+    private func parseInput(_ input: String?) -> [(pair: Pair<Int>, start: String.Index)] {
+        let input = input ?? getInput()
 
         return input.matches(of: multiplicationRegex)
             .map { match in

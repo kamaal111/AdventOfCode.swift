@@ -5,30 +5,30 @@
 //  Created by Kamaal M Farah on 11/28/20.
 //
 
-import Foundation
 import AdventOfCode2
+import Foundation
 
 struct Day2: AdventOfCodeSolver {
     let day = 2
     let bundle: Bundle = .module
 
     func solvePart1(_ input: String?) async throws -> String {
-        let input = try parseInput(input)
+        let input = parseInput(input)
         let safeReports = input.reduce(0) { result, report in result + (reportIsSafe(report) ? 1 : 0) }
 
         return String(safeReports)
     }
 
     func solvePart2(_ input: String?) async throws -> String {
-        let input = try parseInput(input)
+        let input = parseInput(input)
         let safeReports = input.reduce(0) { result, report in
             if reportIsSafe(report) {
                 return result + 1
             }
 
             let hasToleratedReport = (0..<report.count).contains { i in
-                let potentionallyToleratedReport = Array(report[0 ..< i] + report[(i + 1) ..< report.count])
-                return reportIsSafe(potentionallyToleratedReport)
+                let potentiallyToleratedReport = Array(report[0..<i] + report[(i + 1)..<report.count])
+                return reportIsSafe(potentiallyToleratedReport)
             }
 
             return result + (hasToleratedReport ? 1 : 0)
@@ -40,7 +40,7 @@ struct Day2: AdventOfCodeSolver {
     func reportIsSafe(_ report: [Int]) -> Bool {
         var previous: Int = report[0]
         var isIncreasing: Bool?
-        for level in report[1 ..< report.count] {
+        for level in report[1..<report.count] {
             if isIncreasing == nil {
                 if level > previous {
                     isIncreasing = true
@@ -51,9 +51,10 @@ struct Day2: AdventOfCodeSolver {
                 }
             }
 
-            let isIncreasingValue = isIncreasing!
+            guard let isIncreasing else { fatalError("Is increasing should be present at this point") }
+
             let delta = level - previous
-            if isIncreasingValue {
+            if isIncreasing {
                 if delta < 1 || delta > 3 {
                     return false
                 }
@@ -68,8 +69,8 @@ struct Day2: AdventOfCodeSolver {
         return true
     }
 
-    private func parseInput(_ input: String?) throws -> [[Int]] {
-        let input = if let input { input } else { try getInput() }
+    private func parseInput(_ input: String?) -> [[Int]] {
+        let input = input ?? getInput()
 
         return input.split(whereSeparator: \.isNewline)
             .compactMap { line -> [Int]? in

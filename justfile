@@ -14,4 +14,7 @@ input year day:
 # Make Advent of Code day
 day year day:
     {{ PNR }} day --year {{ year }} --day {{ day }}
-    just input {{ year }} {{ day }}
+
+# Run all Swift tests
+test:
+    swift test

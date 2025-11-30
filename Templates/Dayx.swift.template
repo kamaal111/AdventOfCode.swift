@@ -13,19 +13,19 @@ struct Day{{ day }}: AdventOfCodeSolver {
     let bundle: Bundle = .module
 
     func solvePart1(_ input: String?) async throws -> String {
-        let input = try parseInput(input)
+        let _ = parseInput(input)
 
         return ""
     }
 
     func solvePart2(_ input: String?) async throws -> String {
-        let input = try parseInput(input)
+        let _ = parseInput(input)
 
         return ""
     }
 
-    private func parseInput(_ input: String?) throws -> String {
-        let input = if let input { input } else { try getInput() }
+    private func parseInput(_ input: String?) -> String {
+        let input = input ?? getInput()
 
         return input
     }

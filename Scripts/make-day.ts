@@ -4,17 +4,21 @@ import fs from 'node:fs/promises';
 import { exitWithValibotIssue } from './utils/validation';
 import { type DayYearArgs, getDayYearArgs } from './utils/args';
 import { fileExists, isDirectory } from './utils/fs';
+import downloadInput from './utils/download-input';
+import { getSessionIdEnv, type SessionEnv } from './utils/env';
 
 const TEMPLATES_PATH = 'Templates';
 const DAY_TEMPLATE_PATH = path.join(TEMPLATES_PATH, 'Dayx.swift.template');
 const TEST_TEMPLATE_PATH = path.join(TEMPLATES_PATH, 'DayxTests.swift.template');
 
 let values: DayYearArgs;
+let env: SessionEnv;
 let dayTemplateContent: string;
 let testTemplateContent: string;
 try {
-  [values, dayTemplateContent, testTemplateContent] = await Promise.all([
+  [values, env, dayTemplateContent, testTemplateContent] = await Promise.all([
     getDayYearArgs(),
+    getSessionIdEnv(),
     fs.readFile(DAY_TEMPLATE_PATH, { encoding: 'utf8' }),
     fs.readFile(TEST_TEMPLATE_PATH, { encoding: 'utf8' }),
   ]);
@@ -76,3 +80,10 @@ if (!testDestinationExists) {
 
 await Promise.all(filesToCreate.map(fileToCreate => fs.writeFile(fileToCreate.filepath, fileToCreate.content)));
 console.log('Successfully created day');
+
+const created = await downloadInput({ year: values.year, day: values.day, sessionId: env.AOC_SESSION_ID });
+if (!created) {
+  console.log('Input file already exists');
+} else {
+  console.log('Successfully stored input file');
+}

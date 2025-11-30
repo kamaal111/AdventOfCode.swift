@@ -16,15 +16,8 @@ package protocol AdventOfCodeSolver: Sendable {
 }
 
 extension AdventOfCodeSolver {
-    package func getInput() throws -> String {
-        guard let url = bundle.url(forResource: "day\(day)", withExtension: "txt") else {
-            throw GetInputErrors.inputNotFound
-        }
-
-        return try String(contentsOf: url)
+    package func getInput() -> String {
+        let url = bundle.url(forResource: "day\(day)", withExtension: "txt")!
+        return try! String(contentsOf: url)
     }
-}
-
-package enum GetInputErrors: Error {
-    case inputNotFound
 }
