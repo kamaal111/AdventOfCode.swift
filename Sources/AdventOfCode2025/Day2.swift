@@ -26,26 +26,27 @@ struct Day2: AdventOfCodeSolver {
     }
 
     private func invalidIdSum(_ id: Pair<Int>) -> Int {
-        var invalidIdSum = 0
-        for value in id.closedRange {
-            guard value > 9 else { continue }
-
+        id.closedRange.reduce(0) { result, value in
+            assert(value > 9)
             let valueString = value.string
-            inner: for i in 1..<(valueString.count + 1) {
-                let chunks = valueString.chunked(i, includeRemainder: true)
-                guard chunks.count > 1 else { continue }
+            let isOfEvenCharacters = valueString.count % 2 == 0
+            let isInvalid = (1..<valueString.count).contains {
+                guard (isOfEvenCharacters && ($0 % 1) == 0) || !isOfEvenCharacters else { return false }
+
+                let chunks = valueString.chunked($0, includeRemainder: true)
+                assert(chunks.count > 1)
                 let firstChunk = chunks.first!
-                guard firstChunk.count == chunks.last!.count else { continue }
+                guard firstChunk.count == chunks.last!.count else { return false }
 
-                let isInvalid = chunks[1..<chunks.count].allSatisfy { $0 == firstChunk }
-                if isInvalid {
-                    invalidIdSum += value
-                    break inner
-                }
+                return chunks.dropFirst()
+                    .allSatisfy { $0 == firstChunk }
             }
-        }
+            if isInvalid {
+                return result + value
+            }
 
-        return invalidIdSum
+            return result
+        }
     }
 
     private func duplicatedInvalidIdSum(_ id: Pair<Int>) -> Int {
