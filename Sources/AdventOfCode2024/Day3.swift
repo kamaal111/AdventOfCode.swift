@@ -1,11 +1,11 @@
 //
 //  Day3.swift
-//  AdventOfCode2
+//  AdventOfCode
 //
 //  Created by Kamaal M Farah on 11/28/20.
 //
 
-import AdventOfCode2
+import AdventOfCode
 import Foundation
 import RegexBuilder
 

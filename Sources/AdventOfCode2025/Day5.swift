@@ -1,12 +1,12 @@
 //
 //  Day5.swift
-//  AdventOfCode2
+//  AdventOfCode
 //
 //  Created by Kamaal M Farah on 12/05/20.
 //
 
+import AdventOfCode
 import Foundation
-import AdventOfCode2
 import KamaalExtensions
 
 struct Day5: AdventOfCodeSolver {
@@ -38,9 +38,7 @@ struct Day5: AdventOfCodeSolver {
 
             return result.union(freshRanges)
         }
-        .reduce(Set<Int>()) { result, ids in
-            return result.union(ids.closedRange)
-        }
+        .reduce(Set<Int>()) { result, ids in result.union(ids.closedRange) }
         .count
         .string
     }

@@ -1,11 +1,12 @@
 //
 //  Day3Tests.swift
-//  AdventOfCode2
+//  AdventOfCode
 //
 //  Created by Kamaal M Farah on 11/28/20.
 //
 
 import Testing
+
 @testable import AdventOfCode2024
 
 @MainActor

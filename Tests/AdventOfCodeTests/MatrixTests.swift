@@ -1,13 +1,13 @@
 //
 //  MatrixTests.swift
-//  AdventOfCode2
+//  AdventOfCode
 //
 //  Created by Kamaal M Farah on 11/30/25.
 //
 
 import Testing
 
-@testable import AdventOfCode2
+@testable import AdventOfCode
 
 // MARK: - Init Tests
 

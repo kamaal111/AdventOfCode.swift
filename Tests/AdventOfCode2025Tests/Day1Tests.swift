@@ -1,6 +1,6 @@
 //
 //  Day1Tests.swift
-//  AdventOfCode2
+//  AdventOfCode
 //
 //  Created by Kamaal M Farah on 12/01/20.
 //

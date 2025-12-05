@@ -1,6 +1,6 @@
 //
 //  Matrix.swift
-//  AdventOfCode2
+//  AdventOfCode
 //
 //  Created by Kamaal M Farah on 11/29/25.
 //

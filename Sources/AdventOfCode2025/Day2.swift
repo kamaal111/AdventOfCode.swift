@@ -1,11 +1,11 @@
 //
 //  Day2.swift
-//  AdventOfCode2
+//  AdventOfCode
 //
 //  Created by Kamaal M Farah on 12/02/20.
 //
 
-import AdventOfCode2
+import AdventOfCode
 import Foundation
 import KamaalExtensions
 

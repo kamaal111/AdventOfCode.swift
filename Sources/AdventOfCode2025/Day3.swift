@@ -1,12 +1,12 @@
 //
 //  Day3.swift
-//  AdventOfCode2
+//  AdventOfCode
 //
 //  Created by Kamaal M Farah on 12/03/20.
 //
 
+import AdventOfCode
 import Foundation
-import AdventOfCode2
 import KamaalExtensions
 
 struct Day3: AdventOfCodeSolver {
@@ -38,7 +38,7 @@ struct Day3: AdventOfCodeSolver {
                 }
             }
             var highestLeft = bank[highestLeftIndex + 1]
-            for battery in bank[(highestLeftIndex + 2) ..< bank.count] {
+            for battery in bank[(highestLeftIndex + 2)..<bank.count] {
                 if battery > highestLeft {
                     highestLeft = battery
                 }

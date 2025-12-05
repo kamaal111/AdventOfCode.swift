@@ -1,12 +1,12 @@
 //
 //  Day4.swift
-//  AdventOfCode2
+//  AdventOfCode
 //
 //  Created by Kamaal M Farah on 12/04/20.
 //
 
+import AdventOfCode
 import Foundation
-import AdventOfCode2
 import KamaalExtensions
 
 struct Day4: AdventOfCodeSolver {

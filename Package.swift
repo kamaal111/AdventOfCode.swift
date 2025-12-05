@@ -4,11 +4,11 @@
 import PackageDescription
 
 let package = Package(
-    name: "AdventOfCode2",
+    name: "AdventOfCode",
     defaultLocalization: "en",
     platforms: [.macOS(.v13)],
     products: [
-        .library(name: "AdventOfCode2", targets: ["AdventOfCode2"]),
+        .library(name: "AdventOfCode", targets: ["AdventOfCode"]),
         .library(name: "AdventOfCode2024", targets: ["AdventOfCode2024"]),
         .library(name: "AdventOfCode2025", targets: ["AdventOfCode2025"]),
     ],
@@ -17,15 +17,15 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "AdventOfCode2",
+            name: "AdventOfCode",
             dependencies: [
                 .product(name: "KamaalExtensions", package: "KamaalSwift"),
             ]
         ),
-        .testTarget(name: "AdventOfCode2Tests", dependencies: ["AdventOfCode2"]),
+        .testTarget(name: "AdventOfCodeTests", dependencies: ["AdventOfCode"]),
         .target(
             name: "AdventOfCode2024",
-            dependencies: ["AdventOfCode2"],
+            dependencies: ["AdventOfCode"],
             resources: [.process("Input")]
         ),
         .testTarget(name: "AdventOfCode2024Tests", dependencies: ["AdventOfCode2024"]),
@@ -33,14 +33,14 @@ let package = Package(
             name: "AdventOfCode2025",
             dependencies: [
                 .product(name: "KamaalExtensions", package: "KamaalSwift"),
-                "AdventOfCode2",
+                "AdventOfCode",
             ],
             resources: [.process("Input")]
         ),
         .testTarget(
             name: "AdventOfCode2025Tests",
             dependencies: [
-                "AdventOfCode2",
+                "AdventOfCode",
                 "AdventOfCode2025",
             ]),
     ]

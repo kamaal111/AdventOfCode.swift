@@ -1,11 +1,11 @@
 //
 //  Day1.swift
-//  AdventOfCode2
+//  AdventOfCode
 //
 //  Created by Kamaal M Farah on 11/26/25.
 //
 
-import AdventOfCode2
+import AdventOfCode
 import Foundation
 
 struct Day1: AdventOfCodeSolver {

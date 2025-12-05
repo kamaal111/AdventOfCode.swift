@@ -15,9 +15,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AdventOfCode2"
-               BuildableName = "AdventOfCode2"
-               BlueprintName = "AdventOfCode2"
+               BlueprintIdentifier = "AdventOfCode"
+               BuildableName = "AdventOfCode"
+               BlueprintName = "AdventOfCode"
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
@@ -50,9 +50,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "AdventOfCode2"
-            BuildableName = "AdventOfCode2"
-            BlueprintName = "AdventOfCode2"
+            BlueprintIdentifier = "AdventOfCode"
+            BuildableName = "AdventOfCode"
+            BlueprintName = "AdventOfCode"
             ReferencedContainer = "container:">
          </BuildableReference>
       </MacroExpansion>

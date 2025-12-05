@@ -1,12 +1,12 @@
 //
 //  Day{{ day }}.swift
-//  AdventOfCode2
+//  AdventOfCode
 //
 //  Created by Kamaal M Farah on {{ creation_date }}.
 //
 
 import Foundation
-import AdventOfCode2
+import AdventOfCode
 
 struct Day{{ day }}: AdventOfCodeSolver {
     let day = {{ day }}
