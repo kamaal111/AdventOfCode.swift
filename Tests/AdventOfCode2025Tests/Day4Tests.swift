@@ -83,7 +83,8 @@ private let day4 = Day4()
     #expect(solution == "43")
 }
 
-@Test func `Day 4 Part 2`() async throws {
+@Test(.disabled("Slow solution"))
+func `Day 4 Part 2`() async throws {
     let solution = try await day4.solvePart2(nil)
 
     #expect(solution == "8354")

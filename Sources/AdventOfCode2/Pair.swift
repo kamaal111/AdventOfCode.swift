@@ -5,7 +5,7 @@
 //  Created by Kamaal M Farah on 11/27/25.
 //
 
-package struct Pair<T> {
+package struct Pair<T: Hashable>: Hashable {
     package let left: T
     package let right: T
 
