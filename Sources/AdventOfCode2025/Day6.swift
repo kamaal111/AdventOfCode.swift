@@ -5,8 +5,8 @@
 //  Created by Kamaal M Farah on 12/06/20.
 //
 
-import Foundation
 import AdventOfCode
+import Foundation
 import KamaalExtensions
 
 struct Day6: AdventOfCodeSolver {
@@ -20,7 +20,7 @@ struct Day6: AdventOfCodeSolver {
             .map { i, operation in
                 var numbers: [Int] = []
                 for numberRow in numberRows {
-                    numbers.append(numberRow[i])
+                    numbers.append(numberRow[i].number)
                 }
                 return Formula(numbers: numbers, operation: operation)
             }
@@ -31,21 +31,45 @@ struct Day6: AdventOfCodeSolver {
     func solvePart2(_ input: String?) async throws -> String {
         let (numberRows, operations) = parseInput(input)
 
-        return "0"
+        return operations.enumerated()
+            .map { i, operation in
+                var groupedNumbers: [Int: [Int]] = [:]
+                for numberRow in numberRows {
+                    let number = numberRow[i]
+                    for (j, paddedNumber) in number.getPaddedNumber().enumerated() {
+                        if paddedNumber.isNumber {
+                            groupedNumbers[j, default: []].append(paddedNumber.int!)
+                        }
+                    }
+                }
+                let numbers = groupedNumbers.values
+                    .map { $0.map(\.string).joined(separator: "").int! }
+
+                return Formula(numbers: numbers, operation: operation)
+            }
+            .reduce(0) { result, formula in result + formula.calculate() }
+            .string
     }
 
-    private func parseInput(_ input: String?) -> (numberRows: [[Int]], operations: [Operations]) {
+    private func parseInput(_ input: String?) -> (numberRows: [[NumberItem]], operations: [Operations]) {
         let input = input ?? getInput()
-
-        let (numberRows, operations) = input.splitLines
-            .reduce((numberRows: [[Int]](), operations: [Operations]())) { result, line in
-                let splitten = line.split(whereSeparator: \.isWhitespace)
-                let maybeNumbers = splitten.compactMap(\.int)
-                if !maybeNumbers.isEmpty {
-                    return (result.numberRows.appended(maybeNumbers), result.operations)
-                }
-                return (result.numberRows, splitten.map(Operations.fromStringSubsequence))
+        let lines = input.split(omittingEmptySubsequences: false, whereSeparator: \.isNewline)
+        let numberRows = lines.reduce([[NumberItem]]()) { result, line in
+            var i = 0
+            let splitten = line.components(separatedBy: " ")
+            let maybeNumbers = splitten.compactMap { char -> NumberItem? in
+                guard let number = Int(String(char)) else { return nil }
+                let position = i % splitten.count
+                i += 1
+                return NumberItem(number: number, line: line, position: position)
             }
+            guard !maybeNumbers.isEmpty else { return result }
+            return result.appended(maybeNumbers)
+        }
+        let operations = lines.reversed()
+            .first { !$0.trimmingByWhitespacesAndNewLines.isEmpty }!
+            .split(whereSeparator: \.isWhitespace)
+            .map(Operations.fromStringSubsequence)
         assert(!operations.isEmpty)
         assert(!numberRows.isEmpty)
         assert(operations.count == numberRows.first?.count)
@@ -54,15 +78,63 @@ struct Day6: AdventOfCodeSolver {
         return (numberRows, operations)
     }
 
+    private struct NumberItem: Hashable {
+        let number: Int
+        let line: String.SubSequence
+        let position: Int
+
+        func getPaddedNumber() -> String {
+            var cursor = 0
+            let sequence = line.split(separator: "")
+                .enumerated()
+                .map { (index: $0, number: $1.int) }
+            var isSearching = true
+            var buffer: [String] = []
+            var startIndex: Int?
+            for (i, subsequence) in sequence {
+                guard cursor <= position else { break }
+                guard !(isSearching && subsequence == nil) else { continue }
+                guard let subsequence else {
+                    isSearching = true
+                    cursor += 1
+                    continue
+                }
+
+                isSearching = false
+                if cursor == position {
+                    if startIndex == nil {
+                        startIndex = i
+                    }
+                    buffer.append(subsequence.string)
+                }
+            }
+
+            guard let startIndex else { fatalError() }
+
+            assert(!buffer.isEmpty)
+            assert(buffer.joined(separator: "").int == number)
+
+            let rightPaddingSize = line.count - (startIndex + buffer.count)
+            let rightPadding = String(Array(repeating: "x", count: rightPaddingSize))
+            let leftPadding = String(Array(repeating: "x", count: line.count - (rightPaddingSize + buffer.count)))
+            let paddedNumber = leftPadding + buffer.joined(separator: "") + rightPadding
+
+            assert(paddedNumber.count == line.count)
+
+            return paddedNumber
+        }
+    }
+
     private struct Formula {
         let numbers: [Int]
         let operation: Operations
 
         func calculate() -> Int {
-            let start = switch operation {
-            case .addition: 0
-            case .multiplication: 1
-            }
+            let start =
+                switch operation {
+                case .addition: 0
+                case .multiplication: 1
+                }
             return numbers.reduce(start) { result, number in
                 switch operation {
                 case .addition: result + number

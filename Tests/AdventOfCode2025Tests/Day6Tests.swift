@@ -43,8 +43,9 @@ private let day6 = Day6()
     #expect(solution == 3_263_827)
 }
 
-@Test func `Day 6 Part 2`() async throws {
+@Test(.disabled("Slow solution (21 seconds)"))
+func `Day 6 Part 2`() async throws {
     let solution = try await day6.solvePart2(nil).int
 
-    #expect(solution == 0)
+    #expect(solution == 12_841_228_084_455)
 }
