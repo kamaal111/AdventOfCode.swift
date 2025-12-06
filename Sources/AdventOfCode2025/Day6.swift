@@ -33,12 +33,16 @@ struct Day6: AdventOfCodeSolver {
 
         return operations.enumerated()
             .map { i, operation in
-                var groupedNumbers: [Int: [Int]] = [:]
+                var groupedNumbers: [Int: [Character]] = [:]
                 for numberRow in numberRows {
                     let number = numberRow[i]
+                    var startedNumbers = false
                     for (j, paddedNumber) in number.getPaddedNumber().enumerated() {
                         if paddedNumber.isNumber {
-                            groupedNumbers[j, default: []].append(paddedNumber.int!)
+                            startedNumbers = true
+                            groupedNumbers[j, default: []].append(paddedNumber)
+                        } else if startedNumbers {
+                            break
                         }
                     }
                 }
@@ -53,16 +57,17 @@ struct Day6: AdventOfCodeSolver {
 
     private func parseInput(_ input: String?) -> (numberRows: [[NumberItem]], operations: [Operations]) {
         let input = input ?? getInput()
-        let lines = input.split(omittingEmptySubsequences: false, whereSeparator: \.isNewline)
+        let lines = input.split(whereSeparator: \.isNewline)
+        let columns = lines[0].split(whereSeparator: \.isWhitespace).count
         let numberRows = lines.reduce([[NumberItem]]()) { result, line in
             var i = 0
-            let splitten = line.components(separatedBy: " ")
-            let maybeNumbers = splitten.compactMap { char -> NumberItem? in
-                guard let number = Int(String(char)) else { return nil }
-                let position = i % splitten.count
-                i += 1
-                return NumberItem(number: number, line: line, position: position)
-            }
+            let maybeNumbers = line.split(whereSeparator: \.isWhitespace)
+                .compactMap { char -> NumberItem? in
+                    guard let number = char.int else { return nil }
+                    let position = i % columns
+                    i += 1
+                    return NumberItem(number: number, line: line, position: position)
+                }
             guard !maybeNumbers.isEmpty else { return result }
             return result.appended(maybeNumbers)
         }
